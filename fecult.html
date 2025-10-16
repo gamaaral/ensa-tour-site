@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ENSA Tour — Londres </title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --primary: #02044F; /* azul */
+      --secondary: #DE2C2C; /* vermelho */
+      --muted: #6b6f86;
+      --bg: #f5f7ff;
+      --card-radius: 12px;
+      --gap: 18px;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:#111}
+    .wrap{max-width:1200px;margin:28px auto;padding:20px}
+
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:14px}
+    .brand img.school{height:72px;border-radius:8px;border:2px solid rgba(0,0,0,0.06)}
+    .title{color:var(--primary)}
+    .subtitle{color:var(--muted);font-weight:600}
+
+    .hero{margin-top:18px;padding:22px;border-radius:var(--card-radius);background:linear-gradient(180deg,rgba(2,4,79,0.06),rgba(222,44,44,0.02));display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .hero-left{flex:1}
+    .hero h1{margin:0;color:var(--primary);font-size:28px}
+    .hero p{margin:8px 0;color:var(--muted)}
+
+    /* grid cards */
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap);margin-top:20px}
+    .card{background:#fff;border-radius:12px;padding:14px;border:2px solid #DE2C2C;box-shadow:0 8px 24px rgba(2,4,79,0.03)}
+    .card img{width:100%;height:140px;object-fit:cover;border-radius:8px;margin-bottom:12px}
+    .card h3{margin:0 0 8px 0;color:var(--primary)}
+    .card p{margin:0;color:var(--muted);font-size:14px}
+    .card ul{padding-left:18px;margin-top:8px}
+
+    /* converter special */
+    .converter{max-width:420px;margin:0 auto;text-align:center}
+    .converter .panel{background:#fff;padding:18px;border-radius:10px;border:2px solid var(--secondary);box-shadow:0 8px 20px rgba(222,44,44,0.06)}
+    .converter img.flag{width:110px;border:3px solid var(--primary);border-radius:6px;margin-bottom:12px}
+    .converter input{width:100%;padding:10px;border:2px solid var(--primary);border-radius:8px;font-size:16px}
+    .converter .btns{margin-top:12px}
+    .btn{display:inline-block;padding:10px 14px;border-radius:8px;border:0;font-weight:700;cursor:pointer}
+    .btn.primary{background:var(--primary);color:#fff}
+    .btn.secondary{background:var(--secondary);color:#fff}
+    .mode{margin-top:8px;color:var(--muted);font-weight:600}
+    #resultado{margin-top:12px;font-weight:800;color:var(--primary)}
+
+    footer{margin-top:28px;padding:18px 0;text-align:center;color:var(--muted)}
+
+    /* responsive */
+    @media (max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:700px){header{flex-direction:column;align-items:flex-start}.grid{grid-template-columns:1fr}.hero{flex-direction:column;align-items:flex-start}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <img src="https://matriculasalesiano.com.br/wp-content/uploads/cropped-favicon2.png" alt="Logo da Escola" class="school">
+        <div>
+          <div class="title"><strong>ENSA Tour — Londres</strong></div>
+          <div class="subtitle">Agência escolar | Fecult — Categoria: Inglaterra</div>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-weight:700;color:var(--primary)">Equipe — Inglaterra</div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-left">
+        <h1>Por que Londres? Porque é única, Ponto final.</h1>
+        <p>Uma cidade em que cada rua conta história — medieval e moderna ao mesmo tempo. Londres é aula de geografia, história, economia e arte ao vivo. Ideal para uma viagem escolar que mistura aprendizado e experiência. Londres, capital da Inglaterra e do Reino Unido, é uma cidade do século 21 com uma história que remonta à era romana. Seu centro abriga as sedes imponentes do Parlamento, a famosa torre do relógio do Big Ben e a Abadia de Westminster, local de coroação dos monarcas britânicos. Do outro lado do rio Tâmisa, a roda gigante London Eye tem vista panorâmica do complexo cultural da margem sul e de toda a cidade.</p>
+      </div>
+      <div class="converter">
+        <div class="panel">
+          <img class="flag" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Flag_of_England.svg/1200px-Flag_of_England.svg.png" alt="Bandeira Reino Unido">
+          <h3>Conversor Libra ↔ Real</h3>
+          <input id="valor" type="number" placeholder="Digite o valor" />
+          <div class="btns">
+            <button class="btn primary" onclick="converter()">Converter</button>
+            <button class="btn secondary" onclick="trocar()">Trocar (↔)</button>
+          </div>
+          <div id="modo" class="mode">Convertendo: Libra → Real</div>
+          <div id="resultado">&nbsp;</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid">
+      <!-- História -->
+      <article class="card">
+        <img src="https://res.cloudinary.com/aenetworks/image/upload/c_fill,w_1200,h_630,g_auto/dpr_auto/f_auto/q_auto:eco/v1/this-day-in-history-05-31-1859-big-ben-in-london" alt="Big Ben">
+        <h3>Breve Histórico</h3>
+        <p>Londres começou como Londinium, fundada pelos romanos no século I. Cresceu como centro comercial medieval, foi palco do Grande Incêndio (1666), coração da Revolução Industrial, e resistiu aos bombardeios da Segunda Guerra Mundial. Hoje é metrópole global, com patrimônio histórico e inovação tecnológica.</p>
+      </article>
+
+      <!-- Localidade / População -->
+      <article class="card">
+        <img src="https://www.visitlondon.com/-/media/images/london/visit/things-to-do/sightseeing/london-attractions/british-museum/british-museum-2023-images/british-museum-in-london.jpg?mw=440&rev=554ed715deac473ba809e0ade33f9fa9&hash=BE8B066E2C4B27A2783CD6F8AD4491E3" alt="British Museum">
+        <h3>Localidade & População</h3>
+        <p>Londres é a capital da Inglaterra e do Reino Unido, banhada pelo rio Tâmisa. A área metropolitana tem cerca de 8–9 milhões de habitantes, extremamente multicultural e densamente povoada.</p>
+      </article>
+
+      <!-- Área / Acomodação -->
+      <article class="card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Tower_bridge_London_Twilight_-_November_2006.jpg" alt="Tower Bridge">
+        <h3>Área & Acomodação</h3>
+        <p>Londres ocupa uma grande área com vários boroughs. Para grupos escolares, prefira hospedagem próxima ao metrô ou ao South Bank — áreas como Westminster, Kensington e Camden são práticas e seguras para visitantes.</p>
+      </article>
+
+      <!-- Documentos -->
+      <article class="card">
+        <img src="https://www.londresparaprincipiantes.com/wp-content/uploads/2010/09/Camden-Town.jpg" alt="Camden Market">
+        <h3>Documentos Necessários</h3>
+        <ul>
+          <li>Passaporte válido (confira validade mínima exigida).</li>
+          <li>Visto: cidadãos brasileiros geralmente não precisam para turismo curto — confirmar antes da viagem.</li>
+          <li>Autorização e documentos para menores (quando aplicável).</li>
+        </ul>
+      </article>
+
+      <!-- Finanças (já tem conversor) -->
+      <article class="card">
+        <img src="https://cdn.rt.emap.com/wp-content/uploads/sites/4/2025/06/30105946/Bank-of-England-Image-by-Shutterstock-1600x1067.webp" alt="Bank of England">
+        <h3>Finanças</h3>
+        <p><strong>Moeda:</strong> Libra Esterlina (GBP). 1 £ = R$ 7,30 (cotação fixa para este projeto).</p>
+        <p class="muted">Muitos serviços aceitam cartão contactless; use Oyster Card para economizar no transporte. Planeje orçamento maior para alimentação e atrações.</p>
+      </article>
+
+      <!-- Seguro viagem -->
+      <article class="card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/St_Mary%27s_Hospital.jpg" alt="Farmácia">
+        <h3>Seguro Viagem</h3>
+        <p>Contrate seguro com cobertura médica, extravio de bagagem e cancelamentos. Tenha cópias digitais e impressas da apólice e números de emergência sempre à mão.</p>
+      </article>
+
+      <!-- Idioma / Cultura -->
+      <article class="card">
+        <img src="https://images.contentstack.io/v3/assets/blt06f605a34f1194ff/blt6aa745c581b442e3/681f33da3d143a5fb5212d0b/iStock-694113254-Header_Mobile.jpg?format=webp&quality=60&width=1440" alt="Notting Hill">
+        <h3>Idioma & Cultura</h3>
+        <p>Idioma principal: inglês. Londres é multicultural — respeite costumes locais: filas, pontualidade em situações formais e comportamento reservado em transportes públicos.</p>
+      </article>
+
+      <!-- Saúde e segurança -->
+      <article class="card">
+        <img src="https://static01.nyt.com/images/2019/07/19/world/europe/19xp-hacked/19xp-hacked-superJumbo.jpg" alt="Serviços de emergência">
+        <h3>Saúde & Segurança</h3>
+        <ul>
+          <li>Emergência: 999 (polícia, ambulância, bombeiros).</li>
+          <li>Use seguro privado para atendimento; farmácias e hospitais estão espalhados pela cidade.</li>
+          <li>Cuidados com furtos: mantenha pertences seguros em transporte e áreas turísticas.</li>
+        </ul>
+      </article>
+
+      <!-- Clima -->
+      <article class="card">
+        <img src="https://media.istockphoto.com/id/1191765494/pt/foto/beautiful-aerial-panoramic-view-of-the-hyde-park-in-london.jpg?s=612x612&w=0&k=20&c=mYmO8czq-7JJGi7lIZdduDsQiNRfO1HakpnkhYzs1dU=" alt="Hyde Park">
+        <h3>Clima & Estações</h3>
+        <p>Clima temperado-marítimo: invernos frios e úmidos, verões amenos. Melhor época para escolas: maio a setembro (mais luz do dia e eventos ao ar livre).</p>
+      </article>
+
+      <!-- Transporte -->
+      <article class="card">
+        <img src="https://www.visitlondon.com/-/media/images/london/visit/traveller-information/getting-around/london-tube/london-underground-tube-roundel-1920x1080.png?mw=640&rev=ea01e49c40014209ac1b0f87b82755de&hash=626DB8FACAEAF65E9F5A1DDE6000D059" alt="Underground">
+        <h3>Transporte</h3>
+        <p>Transporte público eficiente: metrô (The Tube), ônibus, trens urbanos. Use Oyster Card ou cartão contactless para economizar. Apps de táxi (Uber, Bolt) e táxis pretos licenciados são alternativas seguras.</p>
+      </article>
+
+      <!-- Atrações -->
+      <article class="card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/London-Eye-2009.JPG/1200px-London-Eye-2009.JPG" alt="London Eye">
+        <h3>Atrações Turísticas</h3>
+        <ul>
+          <li>Tower of London & Tower Bridge</li>
+          <li>Palácio de Buckingham (troca da guarda)</li>
+          <li>British Museum, Tate Modern, National Gallery</li>
+          <li>London Eye e passeio pelo South Bank</li>
+          <li>Camden Market, Covent Garden, Notting Hill</li>
+        </ul>
+      </article>
+
+      <!-- Gastronomia -->
+      <article class="card">
+        <img src="" alt="https://upload.wikimedia.org/wikipedia/commons/f/ff/Fish_and_chips_blackpool.jpg">
+        <h3>Gastronomia</h3>
+        <p>Londres oferece uma culinária diversa, refletindo sua multiculturalidade. Experimente pratos tradicionais como fish and chips, Sunday roast com Yorkshire pudding e afternoon tea com scones. Mercados como Borough Market e Camden Market são perfeitos para explorar sabores globais, de curry indiano a doces árabes.</p>
+      </article>
+
+    </div>
+
+    <footer>
+      ENSA Tour — Fecult 2025 • Projeto escolar feito por Guilherme, Victor, Calebe, Ricardo e Gabriel
+    </footer>
+  </div>
+
+  <script>
+    // Conversor Libra <-> Real
+    let modo = 'GBPtoBRL';
+    const cotacao = 7.30; // 1 GBP = 7.30 BRL
+
+    function converter(){
+      const valor = parseFloat(document.getElementById('valor').value);
+      if(isNaN(valor)){
+        document.getElementById('resultado').innerText = 'Digite um valor válido.';
+        return;
+      }
+      if(modo === 'GBPtoBRL'){
+        const res = valor * cotacao;
+        document.getElementById('resultado').innerText = `£${valor.toFixed(2)} = R$ ${res.toFixed(2)}`;
+      } else {
+        const res = valor / cotacao;
+        document.getElementById('resultado').innerText = `R$ ${valor.toFixed(2)} = £ ${res.toFixed(2)}`;
+      }
+    }
+
+    function trocar(){
+      if(modo === 'GBPtoBRL'){
+        modo = 'BRLtoGBP';
+        document.getElementById('modo').innerText = 'Convertendo: Real → Libra';
+      } else {
+        modo = 'GBPtoBRL';
+        document.getElementById('modo').innerText = 'Convertendo: Libra → Real';
+      }
+      document.getElementById('valor').value = '';
+      document.getElementById('resultado').innerText = '';
+    }
+  </script>
+</body>
+</html>
